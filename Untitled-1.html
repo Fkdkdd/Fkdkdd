@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Empresa de Paquetería</title>
+
+    <!-- Enlaces a los estilos y scripts de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Estilos adicionales -->
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */ 
+        .navbar {
+          margin-bottom: 0;
+          border-radius: 0;
+        }
+        
+        /* Add a gray background color and some padding to the footer */
+        footer {
+          background-color: #f2f2f2;
+          padding: 25px;
+        }
+        body {
+            padding-top: 56px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#">Empresa de Paquetería</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <h2>Calculadora de Envío</h2>
+        <form id="miFormulario">
+            <!-- Campos del formulario -->
+            <div class="form-group">
+                <label for="dni">DNI del Cliente:</label>
+                <input type="text" class="form-control" id="dni" placeholder="Ingrese DNI" required>
+            </div>
+            <div class="form-group">
+                <label for="ciudadOrigen">Ciudad de Origen:</label>
+                <input type="text" class="form-control" id="ciudadOrigen" placeholder="Ciudad de Origen" required>
+            </div>
+            <div class="form-group">
+                <label for="ciudadDestino">Ciudad de Destino:</label>
+                <input type="text" class="form-control" id="ciudadDestino" placeholder="Ciudad de Destino" required>
+            </div>
+            <div class="form-group">
+                <label for="peso">Peso del Paquete (Kg):</label>
+                <input type="number" class="form-control" id="peso" placeholder="Peso del Paquete" required>
+            </div>
+
+            <!-- Botón de enviar -->
+            <button type="button" class="btn btn-primary" onclick="calcularPrecio()">Calcular Precio</button>
+        </form>
+
+        <!-- Resultado del cálculo -->
+        <div id="resultado" class="mt-4"></div>
+    </div>
+
+    <!-- Script de JavaScript para la validación y cálculos -->
+    <script>
+        function calcularPrecio() {
+            // Lógica de validación del DNI y cálculo de precio
+            var dni = document.getElementById("dni").value;
+            var ciudadOrigen = document.getElementById("ciudadOrigen").value;
+            var ciudadDestino = document.getElementById("ciudadDestino").value;
+            var peso = document.getElementById("peso").value;
+
+            // Implementa la validación del DNI y el cálculo del precio aquí
+
+            // Muestra el resultado en la página
+            document.getElementById("resultado").innerHTML = "Precio del envío: [resultado]";
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="container-fluid text-center">
+      <p>Empresa de Paquetería - Footer Text</p>
+    </footer>
+
+</body>
+</html>
+<!-- Script de JavaScript para la validación y cálculos -->
+<script>
+    document.getElementById("calcularPrecioBtn").addEventListener("click", function() {
+        // Lógica de validación del DNI y cálculo de precio
+        var dni = document.getElementById("dni").value;
+        var ciudadOrigen = document.getElementById("ciudadOrigen").value;
+        var ciudadDestino = document.getElementById("ciudadDestino").value;
+        var peso = parseFloat(document.getElementById("peso").value);
+
+        // Validación básica de peso
+        if (isNaN(peso) || peso <= 0) {
+            alert("Por favor, ingrese un peso válido.");
+            return;
+        }
+
+        // Implementa la lógica de cálculo del precio aquí
+        var precio = 0;
+        if (ciudadOrigen === ciudadDestino) {
+            precio = 5;
+        } else if (ciudadOrigen === "Palma") {
+            precio = peso < 10 ? 7 : peso <= 20 ? 7 * 1.5 : 7 * 2;
+        } else {
+            precio = peso < 10 ? 9 : peso <= 20 ? 9 * 1.5 : 9 * 2;
+        }
+
+        // Muestra el resultado en la página
+        document.getElementById("resultado").innerHTML = "Precio del envío: " + precio + "€";
+    });
+</script>
